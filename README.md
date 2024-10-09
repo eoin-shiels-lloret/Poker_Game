@@ -1,6 +1,6 @@
 # Poker_Game
 
-Welcome to my first project ever in GitHub, i'm in my 2nd year of ComSci at DCU.
+Welcome to my first project ever in GitHub, i have just started my 2nd year of ComSci at Dublin City University (DCU).
 
 Its a small poker game against a computer
 
