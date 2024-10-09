@@ -1,7 +1,9 @@
 # Poker_Game
 
 Welcome to my first project ever in GitHub, i'm in my 2nd year of ComSci at DCU.
+
 Its a small poker game against a computer
+
 I will be creating this all in vim and be push / pulling from terminal so i can learn git better
 
 The goals of this project are:
