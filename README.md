@@ -14,4 +14,9 @@ The goals of this project are:
 4. To create a small gui with basic images of some components of the game
 5. To use at least one algorithm that i have learned (or will learn in the coming weeks)
 
+References:
+
+Images for the cards
+https://code.google.com/archive/p/vector-playing-cards/downloads
+
 Note: neither the bot nor the player will know each others hand
