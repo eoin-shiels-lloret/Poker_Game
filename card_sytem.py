@@ -1,6 +1,7 @@
 from operator import attrgetter
 import os, os.path
 import climage
+import sys
 
 # Note I will not be adding Joker Cards as they are irrelevant to Poker
 
@@ -38,8 +39,8 @@ class Card(object):
 
     def __str__(self):
         if self.value == 1 or  self.value == 8: # check if it starts with a vowel
-            return f"This is an {self.face} of {self.suit}"
-        return f"This is a {self.face} of {self.suit}"
+            return f"an {self.face} of {self.suit}"
+        return f"a {self.face} of {self.suit}"
 
 def make_deck():
 
@@ -52,13 +53,16 @@ def make_deck():
         i.image = images[iterator]
         iterator += 1
 
-
     return deck
 
 def show_card(*args):
 
-    for card in args:
-        print(climage.convert(card.image, is_unicode=True, width=40))
+
+    img1 = climage.convert(args[0].image, is_unicode=True, width=45)
+    img2 = climage.convert(args[1].image, is_unicode=True, width=45)
+
+    print(img1, img2, end="\n")
+
 
 
 #checking my work
@@ -69,9 +73,9 @@ def show_card(*args):
 #    print(i, "--" ,i.value)
 #print(cards)
 
-sorted_deck = make_deck()
+#sorted_deck = make_deck()
 #print(sorted_deck)
-show_card(sorted_deck[24], sorted_deck[1])
+#show_card(sorted_deck[1], sorted_deck[2])
 #for i in sorted_deck:
 #    print(i, i.image)
 
