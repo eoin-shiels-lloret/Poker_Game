@@ -1,8 +1,14 @@
 from operator import attrgetter
+import os, os.path
+import climage
 
 # Note I will not be adding Joker Cards as they are irrelevant to Poker
 
-suits = ("hearts", "diamonds", "clubs", "spades") # tuples are more efficient than lists according to my lecturer
+suits = {"Clubs" : 0,    #This is to calculate what image im on when looping (4 times through 13)
+        "Diamonds" : 1,
+        "Hearts" : 2,
+        "Spades" : 3}
+
 values = { 1 : "Ace",
            2 : "Two",
            3 : "Three",
@@ -17,31 +23,42 @@ values = { 1 : "Ace",
            12 : "Queen",
            13 : "King"}
 
+path = "./images/PNG-cards-1.3"
+images = [os.path.join(path, file) for file in os.listdir(path)]
+
 # I am considering putting the value of the ace as 14 as it is the most valueble card but it messes up the sorting
 
 class Card(object):
 
-    def __init__(self, value, suit):
+    def __init__(self, value, suit, image=""):
         self.value = value # mainly used for the computer to decide when to bet/fold etc.
         self.suit = suit
         self.face = values[value]
+        self.image = image
 
     def __str__(self):
         if self.value == 1 or  self.value == 8: # check if it starts with a vowel
             return f"This is an {self.face} of {self.suit}"
         return f"This is a {self.face} of {self.suit}"
 
-def make_deck(sort_by=1):
+def make_deck():
 
-    deck = {Card(value, suit) for value in  range(1, 14) for suit in suits}
+    deck = [Card(value, suit) for value in  range(1, 14) for suit in suits]
+
     # need to sort it
+    deck = sorted(deck, key=attrgetter("value", "suit"))
+    iterator = 0
+    for i in deck:
+        i.image = images[iterator]
+        iterator += 1
 
-    if 2 < (sort_by // 1) < 1: # Rounds 1.xx and 2.xx to 1 and 2
-        return "Invalid Option, Try Again"
-    elif sort_by == 1: # This will be the values option
-        return sorted(deck, key=attrgetter("value", "suit"))
-    else: # This will be the suits option --> 2
-        return sorted(deck, key=attrgetter("suit", "value"))
+
+    return deck
+
+def show_card(*args):
+
+    for card in args:
+        print(climage.convert(card.image, is_unicode=True, width=40))
 
 
 #checking my work
@@ -52,7 +69,9 @@ def make_deck(sort_by=1):
 #    print(i, "--" ,i.value)
 #print(cards)
 
-#sorted_deck = make_deck()
+sorted_deck = make_deck()
+#print(sorted_deck)
+show_card(sorted_deck[24], sorted_deck[1])
 #for i in sorted_deck:
-#    print(i)
+#    print(i, i.image)
 
