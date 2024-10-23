@@ -8,7 +8,7 @@ I will be creating this all in vim and be push / pulling from terminal so i can 
 
 The goals of this project are:
 
-1. To be able to play a game of poker against a bot with a basic betting system (Fold, Call and Raise)
+1. To be able to play a game of poker against a bot with a basic betting system (Fold, Call, Raise and Check)
 2. To be able to keep tally of money/chips in between hands
 3. To create a small blind / big blind system (The player will always be the small blind)
 4. To create a small gui with basic images of some components of the game
