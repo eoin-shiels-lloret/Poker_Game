@@ -26,6 +26,7 @@ values = { 1 : "Ace",
 
 path = "./images/PNG-cards-1.3"
 images = [os.path.join(path, file) for file in os.listdir(path)]
+#print(images)
 
 # I am considering putting the value of the ace as 14 as it is the most valueble card but it messes up the sorting
 
@@ -73,9 +74,9 @@ def show_card(*args):
 #    print(i, "--" ,i.value)
 #print(cards)
 
-#sorted_deck = make_deck()
+sorted_deck = make_deck()
 #print(sorted_deck)
 #show_card(sorted_deck[1], sorted_deck[2])
-#for i in sorted_deck:
-#    print(i, i.image)
+for i in sorted_deck:
+    print(climage.convert(i.image, is_unicode=True, width=30))
 
