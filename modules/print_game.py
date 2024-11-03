@@ -15,7 +15,7 @@ class Poker_Gui(object):
         self.root.title("Poker Game")
         self.root.configure(background="green", highlightbackground="black", highlightthickness=8)
 
-        self.label = Label(self.root, text="Make the best hand to win!", font=('Arial', 20))
+        self.label = Label(self.root, text="Pot Value", font=('Arial', 20))
         self.label.pack(padx=10, pady=10)
         self.label.configure(background="green")
 
@@ -42,10 +42,10 @@ class Poker_Gui(object):
 
     def show_button(self):
 
-        quarter_button = Button(self.buttonframe, text="25% pot", font=('Arial', 18))
-        half_button = Button(self.buttonframe, text="50% pot", font=('Arial', 18))
-        three_quarters_button = Button(self.buttonframe, text="75% pot", font=('Arial', 18))
-        full_button = Button(self.buttonframe, text="100% pot", font=('Arial', 18))
+        quarter_button = Button(self.buttonframe, text="25% pot", font=('Arial', 18), fg='#7ca5f2')
+        half_button = Button(self.buttonframe, text="50% pot", font=('Arial', 18), fg='#5289f0')
+        three_quarters_button = Button(self.buttonframe, text="75% pot", font=('Arial', 18), fg='#135fed')
+        full_button = Button(self.buttonframe, text="100% pot", font=('Arial', 18), fg='#043ca7')
 
         quarter_button.grid(row=0, column=0, sticky=W+E)
         half_button.grid(row=0, column=1, sticky=W+E)
