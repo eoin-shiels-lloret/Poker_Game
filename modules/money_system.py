@@ -1,4 +1,4 @@
-import sys
+#!/usr/bin/env python3
 
 class Chip(object):
 
@@ -56,13 +56,13 @@ def make_stacks():
 
     return player_stack, pot
 
-stacks = make_stacks()
+#stacks = make_stacks()
 #print(stacks[0].stack, stacks[0].is_pot, stacks[1].stack, stacks[1].is_pot)
-player = stacks[0]
-pot = stacks[1]
+#player = stacks[0]
+#pot = stacks[1]
 
-print(pot.total(), player.total())
-player.transfer(pot, 259)
-print(pot.total(), player.total())
+#print(pot.total(), player.total())
+#player.transfer(pot, 259)
+#print(pot.total(), player.total())
 
 

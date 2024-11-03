@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from operator import attrgetter
 import os, os.path
 import climage
@@ -74,9 +76,9 @@ def show_card(*args):
 #    print(i, "--" ,i.value)
 #print(cards)
 
-sorted_deck = make_deck()
+#sorted_deck = make_deck()
 #print(sorted_deck)
 #show_card(sorted_deck[1], sorted_deck[2])
-for i in sorted_deck:
-    print(climage.convert(i.image, is_unicode=True, width=30))
+#for i in sorted_deck:
+#    print(climage.convert(i.image, is_unicode=True, width=30))
 
