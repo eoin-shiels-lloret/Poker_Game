@@ -64,6 +64,7 @@ class Poker_Gui(object):
         self.label.configure(background="#023020", fg="#F0FCCE")
         light_mode_button = Button(self.buttonframe, text="Light Mode", font=('Arial', 16), command=self.light_mode_on)
         light_mode_button.grid(row=0, column=4, sticky=W+E)
+        self.color_mode = False
 
     def light_mode_on(self):
 
@@ -71,5 +72,6 @@ class Poker_Gui(object):
         self.label.configure(background="green", fg="black")
         dark_mode_button = Button(self.buttonframe, text="Dark Mode", font=('Arial', 16), command=self.dark_mode_on)
         dark_mode_button.grid(row=0, column=4, sticky=W+E)
+        self.color_mode = True
 
 Poker_Gui()
