@@ -9,12 +9,15 @@ class Poker_Gui(object):
 
     def __init__(self):
 
-        self.root = Tk()
-        self.root.geometry('1000x800')
-        self.root.title("Poker Game")
 
+        self.root = Tk()
+        self.root.attributes('-fullscreen', True)
+        self.root.title("Poker Game")
+        self.display_height=self.root.winfo_screenheight()
+        self.display_width=self.root.winfo_screenwidth()
         self.label = Label(self.root, text="Pot Value", font=('Arial', 20), height=2, width=12)
         self.label.pack(padx=10, pady=15)
+        self.root.bind("<Escape>", self.end_fullscreen)
 
         # create the buttonframe, might make this a function like main_buttons in the future
         self.buttonframe = Frame(self.root, highlightbackground="black", highlightthickness=4, width=1000, height=800)
@@ -118,6 +121,11 @@ class Poker_Gui(object):
         for i in btns:
             i.grid_forget()
 
+    def end_fullscreen(self, event=None):
+        self.root.attributes("-fullscreen", False)
+        self.root.geometry('1000x800')
+        return 'break'
+
     def initialise_deck(self):
 
         # weird bug means i have to make these global (to stop garbage collection)
@@ -132,7 +140,11 @@ class Poker_Gui(object):
         river_card2 = Label(self.root, height=183, width=126, image=img2)
         river_card3 = Label(self.root, height=183, width=126, image=img3)
 
-        river_card1.pack(side=LEFT, padx=(200, 0))
+        print(self.root.attributes("-fullscreen"))
+        c1_width = (self.display_width / 5) if not self.root.attributes("-fullscreen") else 30
+        print(c1_width)
+
+        river_card1.pack(side=LEFT, padx=(c1_width, 0))
         river_card2.pack(side=LEFT)
         river_card3.pack(side=LEFT)
 
