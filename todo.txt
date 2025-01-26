@@ -2,5 +2,5 @@ A small text file to remind me of bugs and changes
 
 1. merge check and call to one button and replace with all-in button
 2. create events
-3. show card images
-4. assimilate modules
+3. assimilate modules
+4. fix fullscreen vs minimise card xpadding
