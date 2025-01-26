@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from operator import attrgetter
+import random
 import os, os.path
-import climage
 import sys
 
 # Note I will not be adding Joker Cards as they are irrelevant to Poker
@@ -26,7 +26,7 @@ values = { 1 : "Ace",
            12 : "Queen",
            13 : "King"}
 
-path = "./images/PNG-cards-1.3"
+path = "./images/resized_images/"
 images = [os.path.join(path, file) for file in os.listdir(path)]
 #print(images)
 
@@ -49,7 +49,7 @@ def make_deck():
 
     deck = [Card(value, suit) for value in  range(1, 14) for suit in suits]
 
-    # need to sort it
+    # need to sort it since the images are sorted
     deck = sorted(deck, key=attrgetter("value", "suit"))
     iterator = 0
     for i in deck:
@@ -58,27 +58,7 @@ def make_deck():
 
     return deck
 
-def show_card(*args):
-
-
-    img1 = climage.convert(args[0].image, is_unicode=True, width=45)
-    img2 = climage.convert(args[1].image, is_unicode=True, width=45)
-
-    print(img1, img2, end="\n")
-
-
-
-#checking my work
-
-#cards = 0
+#deck = make_deck()
+#random.shuffle(deck)
 #for i in deck:
-#    cards += 1
-#    print(i, "--" ,i.value)
-#print(cards)
-
-#sorted_deck = make_deck()
-#print(sorted_deck)
-#show_card(sorted_deck[1], sorted_deck[2])
-#for i in sorted_deck:
-#    print(climage.convert(i.image, is_unicode=True, width=30))
-
+#    print(i)
