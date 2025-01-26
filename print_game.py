@@ -1,8 +1,9 @@
-#from modules.card_system import *
-
-#from modules.money_system import *
+import modules.card_system as cards
+import modules.money_system as money
 from tkinter import *
 from functools import partial
+from PIL import Image, ImageTk
+import random
 
 class Poker_Gui(object):
 
@@ -15,6 +16,7 @@ class Poker_Gui(object):
         self.label = Label(self.root, text="Pot Value", font=('Arial', 20), height=2, width=12)
         self.label.pack(padx=10, pady=15)
 
+        # create the buttonframe, might make this a function like main_buttons in the future
         self.buttonframe = Frame(self.root, highlightbackground="black", highlightthickness=4, width=1000, height=800)
         self.buttonframe.columnconfigure(0, weight=1)
         self.buttonframe.columnconfigure(1, weight=1)
@@ -22,10 +24,13 @@ class Poker_Gui(object):
         self.buttonframe.columnconfigure(3, weight=1)
         self.buttonframe.columnconfigure(4, weight=1)
 
+        # start on lightmode, set color_mode to true
         self.light_mode_on()
         self.color_mode = True # True is for light mode
+        # fill in the buttonframe, pass None in as there are no buttons to remove/reset
         self.main_buttons(None)
         self.buttonframe.pack(fill="x", padx=30, pady=30, side=BOTTOM) # x is for x-axis
+        self.initialise_deck()
         self.mynum = IntVar()
 
         self.root.mainloop()
@@ -38,18 +43,17 @@ class Poker_Gui(object):
 
         quarter_btn = Button(self.buttonframe, text="25% pot", font=('Arial', 18), fg='#7ca5f2')
         half_btn = Button(self.buttonframe, text="50% pot", font=('Arial', 18), fg='#5289f0')
-        three_quarters_btn = Button(self.buttonframe, text="75% pot", font=('Arial', 18), fg='#135fed')
         full_btn = Button(self.buttonframe, text="100% pot", font=('Arial', 18), fg='#043ca7')
         go_back_btn = Button(self.buttonframe, text="Go back", font=('Arial', 18))
         custom_btn = Button(self.buttonframe, text="Custom", font=('Arial', 18), fg='#8132a8')
-        shows = [quarter_btn, half_btn, three_quarters_btn, full_btn, custom_btn, go_back_btn] # based on grid placement
+
+        shows = [quarter_btn, half_btn, full_btn, custom_btn, go_back_btn] # based on grid placement
         custom_btn.configure(command=partial(self.enter_custom, shows))
 
         quarter_btn.grid(row=0, column=0, sticky=W+E)
         half_btn.grid(row=0, column=1, sticky=W+E)
-        three_quarters_btn.grid(row=0, column=2, sticky=W+E)
-        full_btn.grid(row=0, column=3, sticky=W+E)
-        custom_btn.grid(row=0, column=4, sticky=W+E)
+        full_btn.grid(row=0, column=2, sticky=W+E)
+        custom_btn.grid(row=0, column=3, sticky=W+E)
         go_back_btn.grid(row=0, column=5, sticky=W+E)
         go_back_btn.configure(command=partial(self.main_buttons, shows))
 
@@ -62,14 +66,9 @@ class Poker_Gui(object):
         check_btn = Button(self.buttonframe, text="Check", font=('Arial', 18), fg="blue")
         raise_btn = Button(self.buttonframe, text="Raise", font=('Arial', 18), fg="orange")
         call_btn = Button(self.buttonframe, text="Call", font=('Arial', 18), fg="magenta")
+
         mains = [fold_btn, check_btn, call_btn, raise_btn]
         raise_btn.configure(command=partial(self.show_buttons, mains))
-
-        if self.color_mode:
-            self.light_mode_on()
-        else:
-            self.dark_mode_on()
-
 
         fold_btn.grid(row=0, column=0, sticky=W+E)  # w+e is west and east
         check_btn.grid(row=0, column=1, sticky=W+E)
@@ -110,7 +109,7 @@ class Poker_Gui(object):
         if btns[1]['text'] == 'Submit: ':
 
             num = self.mynum.get()
-            self.mynum = 0
+            self.mynum = IntVar()
             print(num)
             self.reset_btns(btns)
             self.main_buttons(None)
@@ -119,5 +118,22 @@ class Poker_Gui(object):
         for i in btns:
             i.grid_forget()
 
+    def initialise_deck(self):
+
+        # weird bug means i have to make these global (to stop garbage collection)
+        global img1, img2, img3
+        self.deck = cards.make_deck()
+        random.shuffle(self.deck)
+        img1 = PhotoImage(file=self.deck[0].image)
+        img2 = PhotoImage(file=self.deck[3].image)
+        img3 = PhotoImage(file=self.deck[10].image)
+
+        river_card1 = Label(self.root, height=183, width=126, image=img1)
+        river_card2 = Label(self.root, height=183, width=126, image=img2)
+        river_card3 = Label(self.root, height=183, width=126, image=img3)
+
+        river_card1.pack(side=LEFT, padx=(200, 0))
+        river_card2.pack(side=LEFT)
+        river_card3.pack(side=LEFT)
 
 Poker_Gui()
