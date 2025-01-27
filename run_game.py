@@ -33,7 +33,7 @@ class Poker_Gui(object):
         # fill in the buttonframe, pass None in as there are no buttons to remove/reset
         self.main_buttons(None)
         self.buttonframe.pack(fill="x", padx=30, pady=30, side=BOTTOM) # x is for x-axis
-        self.initialise_deck()
+        self.comm_cards = self.initialise_deck()
         self.mynum = IntVar()
 
         self.root.mainloop()
@@ -123,8 +123,16 @@ class Poker_Gui(object):
 
     def end_fullscreen(self, event=None):
         self.root.attributes("-fullscreen", False)
+        self.set_cards(self.comm_cards)
         self.root.geometry('1000x800')
         return 'break'
+
+    def set_cards(self, c):
+            
+        c1_width = (self.display_width / 5) if self.root.attributes("-fullscreen") else 30
+        c[0].pack(side=LEFT, padx=(c1_width, 0))
+        c[1].pack(side=LEFT)
+        c[2].pack(side=LEFT)
 
     def initialise_deck(self):
 
@@ -136,16 +144,12 @@ class Poker_Gui(object):
         img2 = PhotoImage(file=self.deck[3].image)
         img3 = PhotoImage(file=self.deck[10].image)
 
-        river_card1 = Label(self.root, height=183, width=126, image=img1)
-        river_card2 = Label(self.root, height=183, width=126, image=img2)
-        river_card3 = Label(self.root, height=183, width=126, image=img3)
+        card1 = Label(self.root, height=183, width=126, image=img1)
+        card2 = Label(self.root, height=183, width=126, image=img2)
+        card3 = Label(self.root, height=183, width=126, image=img3)
 
-        print(self.root.attributes("-fullscreen"))
-        c1_width = (self.display_width / 5) if not self.root.attributes("-fullscreen") else 30
-        print(c1_width)
-
-        river_card1.pack(side=LEFT, padx=(c1_width, 0))
-        river_card2.pack(side=LEFT)
-        river_card3.pack(side=LEFT)
+        comm_cards = [card1, card2, card3]
+        self.set_cards(comm_cards)
+        return comm_cards
 
 Poker_Gui()
